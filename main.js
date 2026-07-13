@@ -1,7 +1,16 @@
 const search_button = document.getElementById("search_button");
 const city_name = document.getElementById("city_name");
 const API_KEY = "165dd84d9346892c4d057d6d1265ad33";
-
+const weather_translation =
+    {
+    "clear sky": "Klarer Himmel",
+    "few clouds": "Wenige Wolken",
+    "scattered clouds": "Aufgelockerte Wolken",
+    "broken clouds": "Viele Wolken",
+    "overcast clouds": "Bedeckter Himmel",
+    "light rain": "Leichter Regen",
+    "moderate rain": "Mäßiger Regen"
+    };
 search_button.addEventListener("click", function()
 {
     document.getElementById("city_name");
@@ -18,7 +27,8 @@ search_button.addEventListener("click", function()
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
 
-            document.getElementById("weather").textContent = data.weather[0].description;
+            const weather = data.weather[0].description;
+            document.getElementById("weather").textContent = weather_translation[weather];
 
             if (data.rain)
             {
@@ -29,11 +39,11 @@ search_button.addEventListener("click", function()
             document.getElementById("rain").textContent = "Kein Regen";
             }
 
-            document.getElementById("humidity").textContent = `${data.main.humidity}%`;
+            document.getElementById("humidity").textContent = `${data.main.humidity}% Luftfeuchtigkeit`;
 
             document.getElementById("sunset").textContent = data.sys.sunset
 
-            document.getElementById("wind").textContent = `${data.wind.speed} m/s`;
+            document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
 
             console.log(data);
         });
