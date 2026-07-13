@@ -41,8 +41,11 @@ search_button.addEventListener("click", function()
 
             document.getElementById("humidity").textContent = `${data.main.humidity}% Luftfeuchtigkeit`;
 
-            const sunset = new Date(data.sys.sunset * 1000);   /* *1000 = weil OpenWeather liefert Sekunden, JavaScript erwartet Millisekunden*/
-            document.getElementById("sunset").textContent = sunset.toLocaleTimeString("de-DE");
+            const sunrise = new Date(data.sys.sunrise * 1000);   /* *1000 = weil OpenWeather liefert Sekunden, JavaScript erwartet Millisekunden*/
+            document.getElementById("sunrise").textContent = `Sonnenaufgang: ${sunrise.toLocaleTimeString("de-DE")}`;
+
+            const sunset = new Date(data.sys.sunset * 1000);
+            document.getElementById("sunset").textContent =`Sonnenuntergang: ${sunset.toLocaleTimeString("de-DE")}`;
 
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
 
