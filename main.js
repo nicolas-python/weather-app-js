@@ -12,6 +12,7 @@ search_button.addEventListener("click", function()
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
+            document.getElementById("temperature").textContent = data.main.temp;
             console.log(data);
         });
 });
