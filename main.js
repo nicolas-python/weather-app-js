@@ -12,7 +12,9 @@ search_button.addEventListener("click", function()
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
         .then(response => response.json())
         .then(data => {
-            document.getElementById("temperature").textContent = data.main.temp;
+
+            const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
+            document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
             console.log(data);
         });
 });
