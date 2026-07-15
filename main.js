@@ -11,10 +11,22 @@ const weather_translation =
     "light rain": "Leichter Regen",
     "moderate rain": "Mäßiger Regen"
     };
+
 search_button.addEventListener("click", function()
 {
     document.getElementById("city_name");
     const city = city_name.value;
+    if (city === "")
+    {
+    alert("Bitte eine Stadt eingeben");
+    return;
+    }
+
+    if (!isNaN(city))                   /*isNaN = is Not a Number*/
+    {
+    alert("Bitte einen gültigen Stadtnamen eingeben");
+    return;
+    }
 
     console.log(city_name.value);
 
