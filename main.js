@@ -27,12 +27,19 @@ search_button.addEventListener("click", function()
     alert("Bitte einen gültigen Stadtnamen eingeben");
     return;
     }
-
     console.log(city_name.value);
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
-        .then(response => response.json())
-        .then(data => {
+        .then(response => {
+
+                if (!response.ok)
+                {
+                throw new Error("Stadt nicht gefunden. Bitte überprüfe die Schreibweise.");
+                }
+                return response.json();
+                })
+
+            .then(data => {
 
             document.getElementById("city").textContent = data.name;
 
