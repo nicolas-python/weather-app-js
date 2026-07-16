@@ -44,6 +44,8 @@ search_button.addEventListener("click", function()
             document.getElementById("city").textContent = data.name;
             document.getElementById("details").textContent = "Details";
 
+            document.getElementById("weather_info").style.display = "block";
+
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
 
