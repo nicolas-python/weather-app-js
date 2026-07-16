@@ -21,9 +21,31 @@ body
     text-align: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
+
+#sun_info
+{
+    display: none;
+    justify-content: space-between;
+    align-items: center;    /*sorgt dafür das es auf einer linie ausgerichtet ist*/
+    width: 350px;
+    margin-top: 100px;
+}
+
+.sun_box
+{
+    text-align: center;
+}
+
+.sun_icon
+{
+    font-size: 40px;
+    margin: 10px;
+}
+
 #weather_details
 {
-    margin-top: 150px;
+    display: none;
+    margin-top: 100px;
     background: lightblue;
     padding: 25px;
     border-radius: 20px;

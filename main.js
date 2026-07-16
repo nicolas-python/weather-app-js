@@ -43,8 +43,8 @@ search_button.addEventListener("click", function()
 
             document.getElementById("city").textContent = data.name;
             document.getElementById("details").textContent = "Details";
-
             document.getElementById("weather_info").style.display = "block";
+            document.getElementById("weather_details").style.display = "block";
 
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
@@ -68,6 +68,7 @@ search_button.addEventListener("click", function()
 
             const sunset = new Date(data.sys.sunset * 1000);
             document.getElementById("sunset").textContent =`Sonnenuntergang: ${sunset.toLocaleTimeString("de-DE")}`;
+            document.getElementById("sun_info").style.display = "flex";
 
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
 
