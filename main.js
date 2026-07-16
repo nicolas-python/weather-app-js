@@ -3,7 +3,7 @@ const city_name = document.getElementById("city_name");
 const API_KEY = "165dd84d9346892c4d057d6d1265ad33";
 const weather_translation =
     {
-    "clear sky": "Klarer Himmel",
+    "clear sky": "☀️,Klarer Himmel",
     "few clouds": "Wenige Wolken",
     "scattered clouds": "Aufgelockerte Wolken",
     "broken clouds": "Viele Wolken",
@@ -15,7 +15,7 @@ const weather_translation =
 search_button.addEventListener("click", function()
 {
     document.getElementById("city_name");
-    const city = city_name.value;
+    const city = city_name.value.trim();  /*.trim() entfernt Leerzeichen am Anfang und Ende der Eingabe*/
     if (city === "")
     {
     alert("Bitte eine Stadt eingeben");
