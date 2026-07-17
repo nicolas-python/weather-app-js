@@ -3,14 +3,66 @@ const city_name = document.getElementById("city_name");
 const API_KEY = "165dd84d9346892c4d057d6d1265ad33";
 const weather_translation =
     {
-    "clear sky": "☀️,Klarer Himmel",
-    "few clouds": "Wenige Wolken",
-    "scattered clouds": "Aufgelockerte Wolken",
-    "broken clouds": "Viele Wolken",
-    "overcast clouds": "Bedeckter Himmel",
-    "light rain": "Leichter Regen",
-    "moderate rain": "Mäßiger Regen"
-    };
+    "clear sky":
+    {
+        icon: "☀️",
+        text: "Klarer Himmel"
+    },
+
+    "few clouds":
+    {
+        icon: "🌤️",
+        text: "Wenige Wolken"
+    },
+
+    "broken clouds":
+    {
+        icon: "☁️",
+        text: "Viele Wolken"
+    },
+
+    "overcast clouds":
+    {
+        icon: "☁️",
+        text: "Bedeckter Himmel"
+    },
+
+    "light rain":
+    {
+        icon: "🌦️",
+        text: "Leichter Regen"
+    },
+
+    "moderate rain":
+    {
+        icon: "🌧️",
+        text: "Mäßiger Regen"
+    },
+
+    "heavy intensity rain":
+    {
+        icon: "🌧️",
+        text: "Starker Regen"
+    },
+
+    "thunderstorm":
+    {
+        icon: "⛈️",
+        text: "Gewitter"
+    },
+
+    "snow":
+    {
+        icon: "❄️",
+        text: "Schnee"
+    },
+
+    "mist":
+    {
+        icon: "🌫️",
+        text: "Nebel"
+    }
+};
 
 search_button.addEventListener("click", function()
 {
@@ -49,8 +101,9 @@ search_button.addEventListener("click", function()
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
 
-            const weather = data.weather[0].description;
-            document.getElementById("weather").textContent = weather_translation[weather];
+            const weather = data.weather[0].description;;
+            const currentWeather = weather_translation[weather];
+            document.getElementById("weather").textContent =`${currentWeather.icon} ${currentWeather.text}`;
 
             if (data.rain)
             {
