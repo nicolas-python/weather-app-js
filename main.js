@@ -64,7 +64,21 @@ const weather_translation =
     }
 };
 
+city_name.addEventListener("keydown", function(event)
+{
+    if (event.key === "Enter")
+    {
+        searchWeather();
+    }
+});
+
 search_button.addEventListener("click", function()
+{
+    searchWeather();
+});
+
+
+function searchWeather()
 {
     document.getElementById("city_name");
     const city = city_name.value.trim();  /*.trim() entfernt Leerzeichen am Anfang und Ende der Eingabe*/
@@ -127,5 +141,5 @@ search_button.addEventListener("click", function()
 
             console.log(data);
         });
-});
+};
 
