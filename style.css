@@ -10,6 +10,12 @@ body
     background-position: center;    /* Bild bleibt mittig */
 }
 
+#city_suggestions
+{
+    width: 300px;
+    margin-top: 10px;
+}
+
 #weather_info
 {
     display: none;

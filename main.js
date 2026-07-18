@@ -151,6 +151,20 @@ function searchWeather()
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
 
             console.log(data);
-        });
-};
+    })
 
+    .catch(error =>
+    {
+    console.log("CATCH wurde ausgeführt");
+    const city = city_name.value.trim();
+    console.log("Geocoding Suche:", city);
+
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
+    .then(response => response.json())
+
+    .then(data =>
+        {
+         console.log("Geocoding Ergebnis:", data);
+        });
+    });
+}
