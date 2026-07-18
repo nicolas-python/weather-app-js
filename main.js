@@ -87,7 +87,7 @@ search_button.addEventListener("click", function()
 function searchWeather()
 {
     document.getElementById("city_name");
-    const city = city_name.value.trim();  /*.trim() entfernt Leerzeichen am Anfang und Ende der Eingabe*/
+    const city = city_name.value.trim().toLowerCase()  /*.trim() entfernt Leerzeichen am Anfang und Ende der Eingabe*/
     if (city === "")
     {
     alert("Bitte eine Stadt eingeben");
@@ -99,7 +99,19 @@ function searchWeather()
     alert("Bitte einen gültigen Stadtnamen eingeben");
     return;
     }
-    console.log(city_name.value);
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
+        .then(response => response.json())
+
+        .then(data =>
+        {
+            console.log("Geocoding Ergebnis:", data);
+
+            if (data.length > 0)
+            {
+                document.getElementById("city_suggestions").textContent =
+                "Meinten Sie: " + data[0].name + "?";
+            }
+        });
 
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
         .then(response => {
@@ -151,29 +163,9 @@ function searchWeather()
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
 
             console.log(data);
-    })
-
-    .catch(error =>
-  {
-    console.log("CATCH wurde ausgeführt");
-    const city = city_name.value.trim().toLowerCase();
-    console.log("Geocoding Suche:", city);
-
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
-    .then(response => response.json())
-
-    .then(data =>
-    {
-    console.log("Geocoding Ergebnis:", data);
-
-    if (data.length > 0)
-        {
-            document.getElementById("city_suggestions").textContent = "Meinten Sie: " + data[0].name + "?";
-        }
-    else
-        {
-            document.getElementById("city_suggestions").textContent = "Keine passende Stadt gefunden";
-        }
-    });
-  });
+            })
+            .catch(error =>
+            {
+                alert(error.message);
+            });
 }
