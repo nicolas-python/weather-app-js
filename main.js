@@ -156,7 +156,7 @@ function searchWeather()
     .catch(error =>
     {
     console.log("CATCH wurde ausgeführt");
-    const city = city_name.value.trim();
+    const city = city_name.value.trim().toLowerCase();
     console.log("Geocoding Suche:", city);
 
     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
