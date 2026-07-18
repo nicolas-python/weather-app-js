@@ -154,7 +154,7 @@ function searchWeather()
     })
 
     .catch(error =>
-    {
+  {
     console.log("CATCH wurde ausgeführt");
     const city = city_name.value.trim().toLowerCase();
     console.log("Geocoding Suche:", city);
@@ -163,8 +163,17 @@ function searchWeather()
     .then(response => response.json())
 
     .then(data =>
+    {
+    console.log("Geocoding Ergebnis:", data);
+
+    if (data.length > 0)
         {
-         console.log("Geocoding Ergebnis:", data);
-        });
+            document.getElementById("city_suggestions").textContent = "Meinten Sie: " + data[0].name + "?";
+        }
+    else
+        {
+            document.getElementById("city_suggestions").textContent = "Keine passende Stadt gefunden";
+        }
     });
+  });
 }
