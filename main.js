@@ -27,6 +27,12 @@ const weather_translation =
         text: "Bedeckter Himmel"
     },
 
+    "scattered clouds":
+    {
+    icon: "⛅",
+    text: "Aufgelockerte Wolken"
+    },
+
     "light rain":
     {
         icon: "🌦️",
