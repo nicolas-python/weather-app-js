@@ -108,11 +108,30 @@ function searchWeather()
 
             if (data.length > 0)
             {
-                document.getElementById("city_suggestions").textContent =
-                "Meinten Sie: " + data[0].name + "?";
+            const suggestion = document.getElementById("city_suggestions");
+
+            suggestion.textContent = "";
+
+            const button = document.createElement("button");
+            button.textContent = "Meinten Sie: " + data[0].name + "?";
+
+            button.addEventListener("click", function()
+            {
+                city_name.value = data[0].name;
+                loadWeather(data[0].name);
+            });
+
+            suggestion.appendChild(button);
+            }
+            else
+            {
+                document.getElementById("city_suggestions").textContent = "";
             }
         });
+}
 
+function loadWeather(city)
+{
     fetch(`https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${API_KEY}`)
         .then(response => {
 
