@@ -104,8 +104,6 @@ function searchWeather()
 
         .then(data =>
         {
-            console.log("Geocoding Ergebnis:", data);
-
             if (data.length > 0)
             {
             const suggestion = document.getElementById("city_suggestions");
@@ -180,8 +178,6 @@ function loadWeather(city)
             document.getElementById("sun_info").style.display = "flex";
 
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
-
-            console.log(data);
             })
             .catch(error =>
             {
