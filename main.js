@@ -142,6 +142,9 @@ function loadWeather(city)
 
             .then(data => {
 
+            const weatherCondition = data.weather[0].main;
+            changeBackground(weatherCondition);
+
             document.getElementById("city").textContent = data.name;
             document.getElementById("details").textContent = "Details";
             document.getElementById("weather_info").style.display = "block";
@@ -183,4 +186,10 @@ function loadWeather(city)
             {
                 alert(error.message);
             });
+}
+
+
+function changeBackground(weatherCondition)
+{
+    console.log(weatherCondition);
 }
