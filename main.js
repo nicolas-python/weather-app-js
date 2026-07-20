@@ -188,8 +188,29 @@ function loadWeather(city)
             });
 }
 
+const background_images =
+{
+    "Sunny":"backgrounds/sunny.png",
+    "Clear": "backgrounds/clear_sky.png",
+    "Clouds": "backgrounds/broken_clouds.png",
+    "Rain": "backgrounds/rain.png",
+    "Heavy Rain":"backgrounds/heavy_rain.png",
+    "Snow": "backgrounds/snow.png",
+    "Thunderstorm": "backgrounds/thunderstorm.png",
+    "Mist": "backgrounds/mist.png"
+};
 
 function changeBackground(weatherCondition)
 {
-    console.log(weatherCondition);
+    const background = background_images[weatherCondition];
+
+    if (background)
+    {
+        document.body.style.backgroundImage = `url('${background}')`;     /* Fügt den gespeicherten Bildpfad in die CSS background-image URL ein,
+                                                                          durch den Template String können Variablen mit ${} direkt in den Text eingesetzt werden */
+    }
+    else
+    {
+        document.body.style.backgroundImage = "url('background/background.png')";
+    }
 }
