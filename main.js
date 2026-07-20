@@ -83,22 +83,29 @@ search_button.addEventListener("click", function()
     searchWeather();
 });
 
-
 function searchWeather()
 {
     document.getElementById("city_name");
-    const city = city_name.value.trim().toLowerCase()  /*.trim() entfernt Leerzeichen am Anfang und Ende der Eingabe*/
+
+    const city = city_name.value.trim().toLowerCase();
+
     if (city === "")
     {
-    alert("Bitte eine Stadt eingeben");
-    return;
+        alert("Bitte eine Stadt eingeben");
+        return;
     }
 
-    if (!isNaN(city))                   /*isNaN = is Not a Number*/
+    if (!isNaN(city))
     {
-    alert("Bitte einen gültigen Stadtnamen eingeben");
-    return;
+        alert("Bitte einen gültigen Stadtnamen eingeben");
+        return;
     }
+
+    checkCity(city);
+}
+
+function checkCity(city)
+{
     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
         .then(response => response.json())
 
@@ -106,24 +113,18 @@ function searchWeather()
         {
             if (data.length > 0)
             {
-            const suggestion = document.getElementById("city_suggestions");
-
-            suggestion.textContent = "";
-
-            const button = document.createElement("button");
-            button.textContent = "Meinten Sie: " + data[0].name + "?";
-
-            button.addEventListener("click", function()
-            {
-                city_name.value = data[0].name;
-                loadWeather(data[0].name);
-            });
-
-            suggestion.appendChild(button);
+                if (data[0].name.toLowerCase() === city)
+                {
+                    loadWeather(data[0].name);
+                }
+                else
+                {
+                    findCitySuggestion(city);
+                }
             }
             else
             {
-                document.getElementById("city_suggestions").textContent = "";
+                findCitySuggestion(city);
             }
         });
 }
@@ -184,20 +185,53 @@ function loadWeather(city)
             })
             .catch(error =>
             {
-                alert(error.message);
+                findCitySuggestion(city);
             });
+}
+
+function findCitySuggestion(city)
+{
+    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
+        .then(response => response.json())
+
+        .then(data =>
+        {
+            const suggestion = document.getElementById("city_suggestions");
+
+            suggestion.textContent = "";
+
+            if (data.length > 0)
+            {
+                const button = document.createElement("button");
+
+                button.textContent =
+                "Meinten Sie: " + data[0].name + "?";
+
+                button.addEventListener("click", function()
+                {
+                    city_name.value = data[0].name;
+                    loadWeather(data[0].name);
+                });
+
+                suggestion.appendChild(button);
+            }
+            else
+            {
+                suggestion.textContent = "Keine passende Stadt gefunden";
+            }
+        });
 }
 
 const background_images =
 {
     "Sunny":"backgrounds/sunny.png",
-    "Clear": "backgrounds/clear_sky.png",
-    "Clouds": "backgrounds/broken_clouds.png",
-    "Rain": "backgrounds/rain.png",
+    "Clear":"backgrounds/clear_sky.png",
+    "Clouds":"backgrounds/broken_clouds.png",
+    "Rain":"backgrounds/rain.png",
     "Heavy Rain":"backgrounds/heavy_rain.png",
-    "Snow": "backgrounds/snow.png",
-    "Thunderstorm": "backgrounds/thunderstorm.png",
-    "Mist": "backgrounds/mist.png"
+    "Snow":"backgrounds/snow.png",
+    "Thunderstorm":"backgrounds/thunderstorm.png",
+    "Mist":"backgrounds/mist.png"
 };
 
 function changeBackground(weatherCondition)
