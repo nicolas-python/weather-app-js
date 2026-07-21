@@ -180,6 +180,9 @@ function loadWeather(city)
             const sunrise = new Date(data.sys.sunrise * 1000);   /* *1000 = weil OpenWeather liefert Sekunden, JavaScript erwartet Millisekunden*/
             document.getElementById("sunrise").textContent = `Sonnenaufgang: ${sunrise.toLocaleTimeString("de-DE")}`;
 
+            const sunnoon = new Date(data.sys.sunrise * 1000 + (data.sys.sunset * 1000 - data.sys.sunrise * 1000) / 2);
+            document.getElementById("sunnoon").textContent = `Sonnenhöchststand: ${sunnoon.toLocaleTimeString("de-DE")}`;
+
             const sunset = new Date(data.sys.sunset * 1000);
             document.getElementById("sunset").textContent =`Sonnenuntergang: ${sunset.toLocaleTimeString("de-DE")}`;
             document.getElementById("sun_info").style.display = "flex";

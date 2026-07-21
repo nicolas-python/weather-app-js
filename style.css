@@ -52,7 +52,9 @@ body
     transform: translateX(20px);
 }
 
-.sun_box
+#sunrise_box,
+#sunnoon_box,
+#sunset_box
 {
     text-align: center;
 }
