@@ -154,6 +154,9 @@ function loadWeather(city)
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
 
+            const feelsLike = data.main.feels_like - 273.15;
+            document.getElementById("feels_like").textContent = `Gefühlt wie: ${feelsLike.toFixed(1)} °C`;
+
             const weather = data.weather[0].description;
             const currentWeather = weather_translation[weather] ||      /*|| = Nimm links, wenn es existiert. Sonst nimm rechts.*/
             {
