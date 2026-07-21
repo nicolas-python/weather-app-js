@@ -110,19 +110,23 @@ body
         border-radius: 15px;
     }
 
+        #sun_info
+    {
+        width: 95%;
+        padding: 5px;
+    }
+
+    #sunrise_box,
+    #sunnoon_box,
+    #sunset_box
+    {
+        font-size: 12px;
+    }
+
     .sun_icon
     {
-        font-size: 30px;
-    }
-
-    .sunset_icon
-    {
-        transform: translateX(0px);
-    }
-
-    .sunrise_icon
-    {
-        transform: translateX(0px);
+        font-size: 25px;
+        margin: 5px;
     }
 
     #weather_info
