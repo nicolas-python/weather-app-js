@@ -60,3 +60,28 @@ body
     text-align: center;
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
+
+/* Anpassungen für kleine Bildschirme (Smartphone) */
+@media (max-width: 600px)     /*ab 600 px das nehmen */
+{
+    #search_bar
+    {
+        width: 90%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+    }
+
+    #city_name
+    {
+        width: 90%;
+        max-width: 300px;
+    }
+
+    #search_button
+    {
+        width: 90%;
+        max-width: 300px;
+    }
+}
