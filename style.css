@@ -113,6 +113,16 @@ body
         font-size: 30px;
     }
 
+    .sunset_icon
+    {
+        transform: translateX(50px);
+    }
+
+    .sunrise_icon
+    {
+        transform: translateX(50px);
+    }
+
     #weather_info
     {
         margin-top: 50px;
