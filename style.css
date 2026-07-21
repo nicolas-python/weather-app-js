@@ -21,7 +21,7 @@ body
 {
     display: none;
     margin-top: 50px;
-    background: lightblue;
+    background: rgba(173, 216, 230, 0.4);
     padding: 25px;                  /*innen abstand*/
     border-radius: 20px;
     width: 300px;
@@ -69,7 +69,7 @@ body
 {
     display: none;
     margin-top: 100px;
-    background: lightblue;
+    background: rgba(173, 216, 230, 0.4);
     padding: 25px;
     border-radius: 20px;
     width: 300px;
