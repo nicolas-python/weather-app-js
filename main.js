@@ -211,6 +211,8 @@ function findCitySuggestion(city)
                 {
                     city_name.value = data[0].name;
                     loadWeather(data[0].name);
+
+                    suggestion.textContent = "";
                 });
 
                 suggestion.appendChild(button);
