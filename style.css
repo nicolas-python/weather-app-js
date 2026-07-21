@@ -84,4 +84,29 @@ body
         width: 90%;
         max-width: 300px;
     }
+
+    #sun_info
+    {
+        width: 90%;
+        margin-top: 30px;
+    }
+
+    .sun_icon
+    {
+        font-size: 30px;
+    }
+
+    #weather_info
+    {
+        margin-top: 50px;
+        width: 90%;
+        max-width: 300px;
+    }
+
+    #weather_details
+    {
+        margin-top: 50px;
+        width: 90%;
+        max-width: 300px;
+    }
 }
