@@ -34,7 +34,7 @@ body
     display: none;
     justify-content: space-between;
     align-items: center;    /*sorgt dafür das es auf einer linie ausgerichtet ist*/
-    width: 350px;
+    width: 450px;
     margin-top: 100px;
 
     background: rgba(255,255,255,0.5);
