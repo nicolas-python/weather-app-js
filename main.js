@@ -118,12 +118,12 @@ function levenshteinDistance(word1, word2)
 
     for (let i = 0; i <= word1.length; i = i + 1)
     {
-        matrix.push([]);                /* push fügt eine neue leere Zeile zur Matrix hinzu */
+        matrix.push([]);        /* push fügt eine neue leere Zeile zur Matrix hinzu */
     }
 
     for (let i = 0; i <= word1.length; i = i + 1)
     {
-        matrix[i][0] = i;
+        matrix[i][0] = i;       /* erste Spalte mit Löschkosten füllen */
     }
 
     for (let j = 0; j <= word2.length; j = j + 1)
@@ -131,6 +131,13 @@ function levenshteinDistance(word1, word2)
         matrix[0][j] = j;       /* j läuft durch die Spalten und füllt die erste Zeile */
     }
 
+    for (let i = 1; i <= word1.length; i = i + 1)
+    {
+        for (let j = 1; j <= word2.length; j = j + 1)
+        {
+            console.log(word1[i - 1], word2[j - 1]);
+        }
+    }
     console.log(matrix);
 }
 levenshteinDistance("Haus", "Maus");
