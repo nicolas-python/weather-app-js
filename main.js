@@ -133,14 +133,23 @@ function levenshteinDistance(word1, word2)
 
     for (let i = 1; i <= word1.length; i = i + 1)
     {
-        for (let j = 1; j <= word2.length; j = j + 1)
+    for (let j = 1; j <= word2.length; j = j + 1)
+      {
+        if (word1[i - 1] === word2[j - 1])
         {
-            console.log(word1[i - 1], word2[j - 1]);
+            matrix[i][j] = matrix[i - 1][j - 1];
         }
+        else
+        {
+            matrix[i][j] = Math.min(matrix[i - 1][j], matrix[i][j - 1], matrix[i - 1][j - 1]) + 1;
+        }
+      }
     }
-    console.log(matrix);
+    return matrix[word1.length][word2.length];
 }
-levenshteinDistance("Haus", "Maus");
+console.log(levenshteinDistance("Maus", "Haus"));
+console.log(levenshteinDistance("Berlin", "Berln"));
+console.log(levenshteinDistance("boeblingem", "boeblingen"));
 
 
 function checkCity(city)
@@ -241,26 +250,41 @@ function findCitySuggestion(city)
 
         .then(data =>
         {
+            console.log("API Antwort:", data);
             const suggestion = document.getElementById("city_suggestions");
 
             suggestion.textContent = "";
 
             if (data.length > 0)
             {
-                const button = document.createElement("button");
+            let bestCity = "";
+            let smallestDistance = Infinity;
 
-                button.textContent =
-                "Meinten Sie: " + data[0].name + "?";
+            data.forEach(function(city)
+            {
+            const distance = levenshteinDistance(
+                city.name.toLowerCase(),
+                city_name.value.toLowerCase()
+            );
 
-                button.addEventListener("click", function()
-                {
-                    city_name.value = data[0].name;
-                    loadWeather(data[0].name);
+            if (distance < smallestDistance)
+            {
+                smallestDistance = distance;
+                bestCity = city.name;
+            }
+            });
 
-                    suggestion.textContent = "";
-                });
+            const button = document.createElement("button");
+            button.textContent = "Meinten Sie: " + bestCity + "?";
+            button.addEventListener("click", function()
+            {
+                city_name.value = bestCity;
+                loadWeather(bestCity);
 
-                suggestion.appendChild(button);
+                suggestion.textContent = "";
+            });
+
+            suggestion.appendChild(button);
             }
             else
             {
