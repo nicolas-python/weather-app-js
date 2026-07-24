@@ -104,6 +104,36 @@ function searchWeather()
     checkCity(city);
 }
 
+function proposedCityName(city)
+{
+    return city
+        .normalize("NFD")                       /* zerlegt Sonderzeichen in Buchstabe + Akzent, um sie vergleichbar zu machen */
+        .replace(/[\u0300-\u036f]/g, "")        /* entfernt Akzente/Markierungen */
+        .replace("ō", "o");                     /* ersetzt spezielles Zeichen ō durch normales o extra für Ōsaka  */
+}
+
+function levenshteinDistance(word1, word2)
+{
+    console.log("Vergleiche:", word1, word2);
+
+    let differences = 0;
+
+    for (let i = 0; i < word1.length; i = i + 1)
+    {
+        if (word1[i] !== word2[i])
+        {
+            differences = differences + 1;
+        }
+    }
+
+    return differences;
+}
+
+console.log(levenshteinDistance("Maus", "Haus"));
+console.log(levenshteinDistance("Haus", "Haus"));
+console.log(levenshteinDistance("Berlin", "Berln"));
+
+
 function checkCity(city)
 {
     fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
@@ -113,7 +143,7 @@ function checkCity(city)
         {
             if (data.length > 0)
             {
-                if (data[0].name.toLowerCase() === city)
+                if (proposedCityName(data[0].name.toLowerCase()) === city)
                 {
                     loadWeather(data[0].name);
                 }
