@@ -114,24 +114,26 @@ function proposedCityName(city)
 
 function levenshteinDistance(word1, word2)
 {
-    console.log("Vergleiche:", word1, word2);
+    let matrix = [];            /* Matrix = Tabelle */
 
-    let differences = 0;
-
-    for (let i = 0; i < word1.length; i = i + 1)
+    for (let i = 0; i <= word1.length; i = i + 1)
     {
-        if (word1[i] !== word2[i])
-        {
-            differences = differences + 1;
-        }
+        matrix.push([]);                /* push fügt eine neue leere Zeile zur Matrix hinzu */
     }
 
-    return differences;
-}
+    for (let i = 0; i <= word1.length; i = i + 1)
+    {
+        matrix[i][0] = i;
+    }
 
-console.log(levenshteinDistance("Maus", "Haus"));
-console.log(levenshteinDistance("Haus", "Haus"));
-console.log(levenshteinDistance("Berlin", "Berln"));
+    for (let j = 0; j <= word2.length; j = j + 1)
+    {
+        matrix[0][j] = j;       /* j läuft durch die Spalten und füllt die erste Zeile */
+    }
+
+    console.log(matrix);
+}
+levenshteinDistance("Haus", "Maus");
 
 
 function checkCity(city)
