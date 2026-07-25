@@ -107,6 +107,7 @@ search_button.addEventListener("click", function()
 
 function searchWeather()
 {
+    console.log("Suche gestartet");
     const city = city_name.value.trim().toLowerCase();
 
     if (city === "")
@@ -203,6 +204,9 @@ function findLocalCitySuggestion(input)
 
 function checkCity(city)
 {
+    const suggestionBox = document.getElementById("city_suggestions");
+    suggestionBox.textContent = "";
+
     const suggestion = findLocalCitySuggestion(city);
 
 
@@ -217,10 +221,10 @@ function checkCity(city)
         {
             city_name.value = suggestion;
             loadWeather(suggestion);
-        };
 
-
-        document.getElementById("city_suggestions").appendChild(button);
+            document.getElementById("city_suggestions").textContent = "";
+        }
+        suggestionBox.appendChild(button);
     }
 
     else
