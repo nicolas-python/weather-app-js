@@ -1,6 +1,31 @@
 const search_button = document.getElementById("search_button");
 const city_name = document.getElementById("city_name");
 const API_KEY = "165dd84d9346892c4d057d6d1265ad33";
+let cities = [];
+let citiesLoaded = false;
+
+async function loadCities()
+{
+    const response = await fetch("data/cities.txt");
+    const text = await response.text();
+
+    const lines = text.split("\n");
+
+    cities = lines.map(line =>
+    {
+        const parts = line.split("\t");
+        return parts[1]?.toLowerCase();
+    }).filter(Boolean);
+
+
+    citiesLoaded = true;
+
+    console.log("Städte geladen:", cities.length);
+    console.log("Böblingen vorhanden:", cities.includes("böblingen"));
+}
+
+loadCities();
+
 const weather_translation =
     {
     "clear sky":
@@ -85,8 +110,6 @@ search_button.addEventListener("click", function()
 
 function searchWeather()
 {
-    document.getElementById("city_name");
-
     const city = city_name.value.trim().toLowerCase();
 
     if (city === "")
@@ -100,6 +123,14 @@ function searchWeather()
         alert("Bitte einen gültigen Stadtnamen eingeben");
         return;
     }
+
+
+    if (!citiesLoaded)
+    {
+        alert("Städte werden noch geladen. Bitte kurz warten.");
+        return;
+    }
+
 
     checkCity(city);
 }
@@ -151,30 +182,76 @@ console.log(levenshteinDistance("Maus", "Haus"));
 console.log(levenshteinDistance("Berlin", "Berln"));
 console.log(levenshteinDistance("boeblingem", "boeblingen"));
 
+function findLocalCitySuggestion(input)
+{
+    let bestCity = "";
+    let smallestDistance = Infinity;
+
+
+    cities.forEach(function(city)
+    {
+        const distance = levenshteinDistance(
+            city,
+            input
+        );
+
+
+        if (distance < smallestDistance)
+        {
+            smallestDistance = distance;
+            bestCity = city;
+        }
+    });
+
+
+    console.log(
+        "Bester Treffer:",
+        bestCity,
+        "Distanz:",
+        smallestDistance
+    );
+
+
+    if (smallestDistance <= 2)
+    {
+        return bestCity;
+    }
+
+    return null;
+}
 
 function checkCity(city)
 {
-    fetch(`https://api.openweathermap.org/geo/1.0/direct?q=${city}&limit=5&appid=${API_KEY}`)
-        .then(response => response.json())
+    const suggestion = findLocalCitySuggestion(city);
 
-        .then(data =>
+
+    if (suggestion)
+    {
+        console.log("Vorschlag:", suggestion);
+
+        const button = document.createElement("button");
+
+        button.textContent =
+        "Meinten Sie: " + suggestion + "?";
+
+
+        button.onclick = function()
         {
-            if (data.length > 0)
-            {
-                if (proposedCityName(data[0].name.toLowerCase()) === city)
-                {
-                    loadWeather(data[0].name);
-                }
-                else
-                {
-                    findCitySuggestion(city);
-                }
-            }
-            else
-            {
-                findCitySuggestion(city);
-            }
-        });
+            city_name.value = suggestion;
+            loadWeather(suggestion);
+        };
+
+
+        document
+        .getElementById("city_suggestions")
+        .appendChild(button);
+
+    }
+    else
+    {
+        loadWeather(city);
+    }
+
 }
 
 function loadWeather(city)
