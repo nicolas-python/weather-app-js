@@ -19,9 +19,6 @@ async function loadCities()
 
 
     citiesLoaded = true;
-
-    console.log("Städte geladen:", cities.length);
-    console.log("Böblingen vorhanden:", cities.includes("böblingen"));
 }
 
 loadCities();
@@ -140,7 +137,7 @@ function proposedCityName(city)
     return city
         .normalize("NFD")                       /* zerlegt Sonderzeichen in Buchstabe + Akzent, um sie vergleichbar zu machen */
         .replace(/[\u0300-\u036f]/g, "")        /* entfernt Akzente/Markierungen */
-        .replace("ō", "o");                     /* ersetzt spezielles Zeichen ō durch normales o extra für Ōsaka  */
+        .replace("ō", "o");                     /* ersetzt spezielles Zeichen ō durch normales o extra für Ōsaka */
 }
 
 function levenshteinDistance(word1, word2)
@@ -178,9 +175,6 @@ function levenshteinDistance(word1, word2)
     }
     return matrix[word1.length][word2.length];
 }
-console.log(levenshteinDistance("Maus", "Haus"));
-console.log(levenshteinDistance("Berlin", "Berln"));
-console.log(levenshteinDistance("boeblingem", "boeblingen"));
 
 function findLocalCitySuggestion(input)
 {
@@ -190,11 +184,7 @@ function findLocalCitySuggestion(input)
 
     cities.forEach(function(city)
     {
-        const distance = levenshteinDistance(
-            city,
-            input
-        );
-
+        const distance = levenshteinDistance(city, input);
 
         if (distance < smallestDistance)
         {
@@ -202,15 +192,6 @@ function findLocalCitySuggestion(input)
             bestCity = city;
         }
     });
-
-
-    console.log(
-        "Bester Treffer:",
-        bestCity,
-        "Distanz:",
-        smallestDistance
-    );
-
 
     if (smallestDistance <= 2)
     {
@@ -227,12 +208,9 @@ function checkCity(city)
 
     if (suggestion)
     {
-        console.log("Vorschlag:", suggestion);
-
         const button = document.createElement("button");
 
-        button.textContent =
-        "Meinten Sie: " + suggestion + "?";
+        button.textContent = "Meinten Sie: " + suggestion + "?";
 
 
         button.onclick = function()
@@ -242,11 +220,9 @@ function checkCity(city)
         };
 
 
-        document
-        .getElementById("city_suggestions")
-        .appendChild(button);
-
+        document.getElementById("city_suggestions").appendChild(button);
     }
+
     else
     {
         loadWeather(city);
@@ -327,7 +303,6 @@ function findCitySuggestion(city)
 
         .then(data =>
         {
-            console.log("API Antwort:", data);
             const suggestion = document.getElementById("city_suggestions");
 
             suggestion.textContent = "";
