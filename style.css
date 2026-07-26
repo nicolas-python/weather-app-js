@@ -59,6 +59,28 @@ body
     text-align: center;
 }
 
+#hourly_weather
+{
+    display: none;
+    margin-top: 50px;
+    background: rgba(255,255,255,0.5);
+    padding: 15px;
+    border-radius: 15px;
+    width: 450px;
+
+    overflow-x: auto;
+    gap: 15px;
+}
+
+.hour_card
+{
+    min-width: 80px;
+    padding: 10px;
+    text-align: center;
+    background: rgba(255,255,255,0.3);
+    border-radius: 15px;
+}
+
 .sun_icon
 {
     font-size: 40px;
@@ -108,12 +130,6 @@ body
         background: rgba(255,255,255,0.5);
         padding: 10px;
         border-radius: 15px;
-    }
-
-        #sun_info
-    {
-        width: 95%;
-        padding: 5px;
     }
 
     #sunrise_box,

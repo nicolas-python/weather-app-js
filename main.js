@@ -132,7 +132,8 @@ function searchWeather()
 
     checkCity(city);
 }
-
+/* Normalisiert Städtenamen für Vergleiche */
+/* aktuell nicht aktiv, da cities.txt bereits kleine Schreibweise nutzt*/
 function proposedCityName(city)
 {
     return city
@@ -255,6 +256,7 @@ function loadWeather(city)
             document.getElementById("details").textContent = "Details";
             document.getElementById("weather_info").style.display = "block";
             document.getElementById("weather_details").style.display = "block";
+            document.getElementById("hourly_weather").style.display = "flex";
 
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
