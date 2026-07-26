@@ -294,7 +294,10 @@ function loadWeather(city)
             document.getElementById("sunset").textContent =`Sonnenuntergang ${sunset.toLocaleTimeString("de-DE")}`;
             document.getElementById("sun_info").style.display = "flex";
 
-            document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`;
+            document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`
+
+            loadHourlyWeather(data.coord.lat, data.coord.lon);
+
             })
             .catch(error =>
             {
@@ -387,4 +390,15 @@ function changeBackground(weatherCondition)
     {
         document.body.style.backgroundImage = "url('background/background.png')";
     }
+}
+
+function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd), lon = longitude = Längengrad (Ost/West)*/
+{
+    fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`)    /* /data/2.5/forecast = kostenlose 5-Tage-Vorhersage mit 3-Stunden-Intervallen */
+        .then(response => response.json())
+
+        .then(data =>
+        {
+            console.log(data);
+        });
 }
