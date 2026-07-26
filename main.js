@@ -214,12 +214,12 @@ function checkCity(city)
     {
         const button = document.createElement("button");
 
-        button.textContent = "Meinten Sie: " + suggestion + "?";
+        button.textContent = "Meinten Sie: " + formatCityName(suggestion) + "?";
 
 
         button.onclick = function()
         {
-            city_name.value = suggestion;
+            city_name.value = formatCityName(suggestion);
             loadWeather(suggestion);
 
             document.getElementById("city_suggestions").textContent = "";
@@ -347,6 +347,17 @@ function findCitySuggestion(city)
                 suggestion.textContent = "Keine passende Stadt gefunden";
             }
         });
+}
+
+function formatCityName(city)
+{
+    return city
+        .split(" ")
+        .map(word =>
+        {
+            return word.charAt(0).toUpperCase() + word.slice(1);
+        })
+        .join(" ");
 }
 
 const background_images =
