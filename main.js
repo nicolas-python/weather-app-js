@@ -398,7 +398,40 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
         .then(response => response.json())
 
         .then(data =>
-        {
-            console.log(data);
-        });
+    {
+    const hourlyContainer = document.getElementById("hourly_weather");
+
+    hourlyContainer.textContent = "";
+
+    const forecast = data.list[0];
+
+    const temperature = forecast.main.temp - 273.15;
+    const date = new Date(forecast.dt * 1000);
+
+    const time = date.toLocaleTimeString("de-DE",
+    {
+        hour: "2-digit",
+        minute: "2-digit"
+           });
+    const weather = forecast.weather[0].description;
+
+    const currentWeather = weather_translation[weather] ||
+    {
+        icon: "❓",
+        text: weather
+    };
+
+    const card = document.createElement("div");
+    card.className = "hour_card";
+
+    card.innerHTML =
+    `
+    <p>${time}</p>
+    <p>${temperature.toFixed(1)} °C</p>
+    <p>${currentWeather.icon}</p>
+    <p>${currentWeather.text}</p>
+    `;
+
+    hourlyContainer.appendChild(card);
+    });
 }
