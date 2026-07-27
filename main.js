@@ -3,6 +3,7 @@ const city_name = document.getElementById("city_name");
 const API_KEY = "165dd84d9346892c4d057d6d1265ad33";
 let cities = [];
 let citiesLoaded = false;
+let selectedSuggestion = null;
 
 async function loadCities()
 {
@@ -96,7 +97,18 @@ city_name.addEventListener("keydown", function(event)
 {
     if (event.key === "Enter")
     {
-        searchWeather();
+        if (selectedSuggestion)
+        {
+            city_name.value = selectedSuggestion;
+            loadWeather(selectedSuggestion);
+
+            document.getElementById("city_suggestions").textContent = "";
+            selectedSuggestion = null;
+        }
+        else
+        {
+            searchWeather();
+        }
     }
 });
 
@@ -213,6 +225,7 @@ function checkCity(city)
 
     if (suggestion)
     {
+        selectedSuggestion = suggestion;
         const button = document.createElement("button");
 
         button.textContent = "Meinten Sie: " + formatCityName(suggestion) + "?";
