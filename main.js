@@ -416,14 +416,27 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
 
     hourlyContainer.textContent = "";
 
+    let lastDay = "";
+
     data.list.forEach(forecast =>
     {
-        console.log(forecast);
     const temperature = forecast.main.temp - 273.15;
 
     const date = new Date(forecast.dt * 1000);
+    const day = date.toLocaleDateString("de-DE",
+        {weekday: "long", day: "2-digit", month: "2-digit"});
 
     const time = date.toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"});      /*2-digit = 2 stellen anzeigen= aus 15:00:00 wird 15:00 */
+
+    if (day !== lastDay)
+    {
+        const dayTitle = document.createElement("h3");
+        dayTitle.textContent = day;
+
+        hourlyContainer.appendChild(dayTitle);
+
+        lastDay = day;
+    }
 
     const weather = forecast.weather[0].description;
 

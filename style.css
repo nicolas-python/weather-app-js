@@ -84,6 +84,11 @@ body
     box-shadow: 0 10px 20px rgba(0,0,0,0.3);
 }
 
+#hourly_weather h3
+{
+    width: 100%;
+}
+
 .sun_icon
 {
     font-size: 40px;
