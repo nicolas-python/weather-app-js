@@ -416,16 +416,15 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
 
     hourlyContainer.textContent = "";
 
-    const forecast = data.list[0];
-
+    data.list.forEach(forecast =>
+    {
+        console.log(forecast);
     const temperature = forecast.main.temp - 273.15;
+
     const date = new Date(forecast.dt * 1000);
 
-    const time = date.toLocaleTimeString("de-DE",
-    {
-        hour: "2-digit",
-        minute: "2-digit"
-           });
+    const time = date.toLocaleTimeString("de-DE", {hour: "2-digit", minute: "2-digit"});      /*2-digit = 2 stellen anzeigen= aus 15:00:00 wird 15:00 */
+
     const weather = forecast.weather[0].description;
 
     const currentWeather = weather_translation[weather] ||
@@ -433,6 +432,7 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
         icon: "❓",
         text: weather
     };
+
 
     const card = document.createElement("div");
     card.className = "hour_card";
@@ -446,5 +446,6 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
     `;
 
     hourlyContainer.appendChild(card);
+    });
     });
 }
