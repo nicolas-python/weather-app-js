@@ -310,6 +310,7 @@ function loadWeather(city)
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`
 
             loadHourlyWeather(data.coord.lat, data.coord.lon);
+            loadAirQuality(data.coord.lat, data.coord.lon);
 
             })
             .catch(error =>
@@ -408,7 +409,7 @@ function changeBackground(weatherCondition)
 function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd), lon = longitude = Längengrad (Ost/West)*/
 {
     fetch(`https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${API_KEY}`)    /* /data/2.5/forecast = kostenlose 5-Tage-Vorhersage mit 3-Stunden-Intervallen */
-        .then(response => response.json())
+        .then(response => response.json())                                                          /* /data → Bereich der API ,/2.5 → API-Version,/forecast → Vorhersage*/
 
         .then(data =>
     {
@@ -461,4 +462,36 @@ function loadHourlyWeather(lat, lon)   /*lat = latitude = Breitengrad (Nord/Süd
     hourlyContainer.appendChild(card);
     });
     });
+}
+
+function loadAirQuality(lat, lon)
+{
+    fetch(`https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${API_KEY}`)
+        .then(response => response.json())
+
+        .then(data =>
+        {
+            console.log(data);
+            const air_quality_translation =
+            {
+                1: "Gut 🟢",
+                2: "Okey 🟡",
+                3: "Mäßig 🟠",
+                4: "Schlecht 🔴",
+                5: "Sehr schlecht 🟣"
+            };
+
+            const airData = data.list[0];
+
+            const aqi = airData.main.aqi;               /*aqi = Air Quality Index*/
+
+           // const pm25 = airData.components.pm2_5;      /*Feinstaub mit einer Größe kleiner als 2,5 Mikrometer*/
+           // const pm10 = airData.components.pm10;       /*Feinstaub kleiner als 10 Mikrometer*/
+
+
+            const airQualityText = air_quality_translation[aqi];
+
+            document.getElementById("air_quality").textContent =
+            `Luftqualität: ${airQualityText}`;
+        });
 }
