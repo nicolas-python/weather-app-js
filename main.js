@@ -471,7 +471,6 @@ function loadAirQuality(lat, lon)
 
         .then(data =>
         {
-            console.log(data);
             const air_quality_translation =
             {
                 1: "Gut 🟢",
