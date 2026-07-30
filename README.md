@@ -50,6 +50,5 @@ Zusätzlich werden stündliche Wettervorhersagen sowie die Luftqualität angezei
 
 ## Nächste Schritte
 
-- Vorschläge nur bei falsch geschriebenen Städten anzeigen
 - weitere Wetterbedingungen und Hintergründe hinzufügen
 - Design verbessern
