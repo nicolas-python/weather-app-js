@@ -220,32 +220,39 @@ function checkCity(city)
     const suggestionBox = document.getElementById("city_suggestions");
     suggestionBox.textContent = "";
 
-    const suggestion = findLocalCitySuggestion(city);
+    const exactCity = cities.includes(city);
 
-
-    if (suggestion)
-    {
-        selectedSuggestion = suggestion;
-        const button = document.createElement("button");
-
-        button.textContent = "Meinten Sie: " + formatCityName(suggestion) + "?";
-
-
-        button.onclick = function()
-        {
-            city_name.value = formatCityName(suggestion);
-            loadWeather(suggestion);
-
-            document.getElementById("city_suggestions").textContent = "";
-        }
-        suggestionBox.appendChild(button);
-    }
-
-    else
+    if (exactCity)
     {
         loadWeather(city);
     }
+    else
+    {
+        const suggestion = findLocalCitySuggestion(city);
 
+        if (suggestion)
+        {
+            selectedSuggestion = suggestion;
+
+            const button = document.createElement("button");
+
+            button.textContent = "Meinten Sie: " + formatCityName(suggestion) + "?";
+
+            button.onclick = function()
+            {
+                city_name.value = formatCityName(suggestion);
+                loadWeather(suggestion);
+
+                document.getElementById("city_suggestions").textContent = "";
+            }
+
+            suggestionBox.appendChild(button);
+        }
+        else
+        {
+            loadWeather(city);
+        }
+    }
 }
 
 function loadWeather(city)
