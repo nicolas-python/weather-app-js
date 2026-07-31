@@ -155,9 +155,15 @@ body
 
     #hourly_weather
     {
-        width:450px;
+        width:350px;
         overflow-x:auto;
         gap:15px;
+    }
+
+    #hourly_weather h3
+    {
+        width:100%;
+        text-align:center;
     }
 
     #weather_info
