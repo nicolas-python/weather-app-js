@@ -315,6 +315,7 @@ function loadWeather(city)
             document.getElementById("sun_info").style.display = "flex";
 
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`
+            document.getElementById("wind_direction").textContent = `Windrichtung: ${data.wind.deg}°`;
 
             loadHourlyWeather(data.coord.lat, data.coord.lon);
             loadAirQuality(data.coord.lat, data.coord.lon);
