@@ -93,6 +93,42 @@ const weather_translation =
     }
 };
 
+function getWindDirection(degree)
+{
+    if (degree >= 337.5 || degree < 22.5)       /* || = ODER /337.5° - 360° ODER 0° - 22.5°/ Der Kreis startet bei 0° und endet bei 360°, deshalb braucht Norden zwei Bedingungen */
+    {
+        return "Norden";
+    }
+    else if (degree < 67.5)
+    {
+        return "Nordosten";
+    }
+    else if (degree < 112.5)
+    {
+        return "Osten";
+    }
+    else if (degree < 157.5)
+    {
+        return "Südosten";
+    }
+    else if (degree < 202.5)
+    {
+        return "Süden";
+    }
+    else if (degree < 247.5)
+    {
+        return "Südwesten";
+    }
+    else if (degree < 292.5)
+    {
+        return "Westen";
+    }
+    else
+    {
+        return "Nordwesten";
+    }
+}
+
 city_name.addEventListener("keydown", function(event)
 {
     if (event.key === "Enter")
@@ -315,7 +351,8 @@ function loadWeather(city)
             document.getElementById("sun_info").style.display = "flex";
 
             document.getElementById("wind").textContent = `${data.wind.speed} m/s Windgeschwindigkeit`
-            document.getElementById("wind_direction").textContent = `Windrichtung: ${data.wind.deg}°`;
+            const windDirection = getWindDirection(data.wind.deg);
+            document.getElementById("wind_direction").textContent = `Windrichtung: ${windDirection}`;
 
             loadHourlyWeather(data.coord.lat, data.coord.lon);
             loadAirQuality(data.coord.lat, data.coord.lon);
