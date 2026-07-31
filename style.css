@@ -86,7 +86,7 @@ body
 
 #hourly_weather h3
 {
-    width: 100%;
+    flex-basis:100%;
 }
 
 .sun_icon
@@ -151,6 +151,13 @@ body
     {
         font-size: 25px;
         margin: 5px;
+    }
+
+    #hourly_weather
+    {
+        width:450px;
+        overflow-x:auto;
+        gap:15px;
     }
 
     #weather_info
