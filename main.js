@@ -518,17 +518,17 @@ function loadAirQuality(lat, lon)
         {
             const air_quality_translation =
             {
-                1: "Gut 🟢",
-                2: "Okey 🟡",
+                1: "Sehr Gut 🟢",
+                2: "Gut 🟡",
                 3: "Mäßig 🟠",
                 4: "Schlecht 🔴",
                 5: "Sehr schlecht 🟣"
             };
 
             const airData = data.list[0];
-
+            console.log(data);
             const aqi = airData.main.aqi;               /*aqi = Air Quality Index*/
-
+            console.log("AQI Wert:", aqi);
            // const pm25 = airData.components.pm2_5;      /*Feinstaub mit einer Größe kleiner als 2,5 Mikrometer*/
            // const pm10 = airData.components.pm10;       /*Feinstaub kleiner als 10 Mikrometer*/
 
