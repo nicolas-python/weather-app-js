@@ -529,13 +529,14 @@ function loadAirQuality(lat, lon)
             console.log(data);
             const aqi = airData.main.aqi;               /*aqi = Air Quality Index*/
             console.log("AQI Wert:", aqi);
-           // const pm25 = airData.components.pm2_5;      /*Feinstaub mit einer Größe kleiner als 2,5 Mikrometer*/
-           // const pm10 = airData.components.pm10;       /*Feinstaub kleiner als 10 Mikrometer*/
+            const pm25 = airData.components.pm2_5;      /*Feinstaub mit einer Größe kleiner als 2,5 Mikrometer*/
+            const pm10 = airData.components.pm10;       /*Feinstaub kleiner als 10 Mikrometer*/
 
 
             const airQualityText = air_quality_translation[aqi];
 
-            document.getElementById("air_quality").textContent =
-            `Luftqualität: ${airQualityText}`;
+            document.getElementById("air_quality").textContent = `Luftqualität: ${airQualityText}`;
+            document.getElementById("pm25").textContent = `PM2.5: ${pm25} µg/m³`;
+            document.getElementById("pm10").textContent = `PM10: ${pm10} µg/m³`;
         });
 }

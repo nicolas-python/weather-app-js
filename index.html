@@ -69,9 +69,33 @@
          <p id="wind_direction"></p>
          <p id="air_quality"></p>
 
-         <details>                                              <!-- details = kompletter ausklappbarer Bereich -->
-        <summary>Luftqualitätsindex (AQI) Erklärung</summary>   <!-- summary = klickbare Überschrift des Ausklappbereichs -->
-        <p>
+        <details>                                  <!-- details = kompletter ausklappbarer Bereich -->
+        <summary>                                   <!-- summary = klickbare Überschrift des Ausklappbereichs -->
+            Luftqualitätsindex (AQI) Erklärung
+        </summary>
+
+         <details>
+             <summary>
+            PM2.5: <span id="pm25"></span>                       <!-- kleinere Feinstaubpartikel (bis 2,5 µm/Mikrometer), die gesundheitlich kritischer -->
+             </summary>
+
+                <p>
+                PM2.5 = Feinstaubpartikel mit einer Größe bis 2,5 µm.
+                Diese kleinen Partikel können tiefer in die Atemwege gelangen.
+                </p>
+         </details>
+
+            <details>
+
+            <summary>
+                PM10: <span id="pm10"></span>       <!-- PM10 = größere Feinstaubpartikel (bis 10 µm/Mikrometer) -->
+            </summary>
+            <p>
+                PM10 = Feinstaubpartikel mit einer Größe bis 10 µm.
+                Diese Partikel sind größer und gelangen hauptsächlich in die oberen Atemwege.
+            </p>
+            </details>
+
             AQI = Air Quality Index<br><br>                     <!-- <br> = zeilenumbruch -->
             1 = Sehr Gut 🟢<br>
             2 = Gut 🟡<br>
