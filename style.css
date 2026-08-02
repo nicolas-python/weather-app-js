@@ -24,6 +24,12 @@ body
     margin-top: 10px;
 }
 
+#city_name
+{
+    width: 200px;
+    padding: 1px;
+}
+
 #weather_info
 {
     display: none;
@@ -134,7 +140,8 @@ body
     #city_name
     {
         width: 90%;
-        max-width: 300px;
+        max-width: 350px;
+        padding: 5px;
     }
 
     #search_button
