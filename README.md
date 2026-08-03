@@ -1,5 +1,5 @@
 # weather-app-js
-Eine Wetter-App mit JavaScript und Wetter-API zur Anzeige aktueller Wetterdaten verschiedener Städte.
+Eine Wetter-App mit JavaScript und der OpenWeather API zur Anzeige aktueller Wetterdaten und Vorhersagen verschiedener Städte mit Design für Desktop und Smartphone.
 
 ## Live Demo
 https://weather-app-js-9phw.onrender.com/
@@ -18,6 +18,10 @@ https://weather-app-js-9phw.onrender.com/
   - Sonnenhöchststand
   - Stündliche Wettervorhersage
   - Luftqualität
+    - AQI (Air Quality Index)
+    - PM2.5 Feinstaubwerte
+    - PM10 Feinstaubwerte
+  - Windrichtung
 - Übersetzung der Wetterbedingungen ins Deutsche
 - Wetterabhängige Hintergrundbilder:
   - klarer Himmel
@@ -46,9 +50,4 @@ Zusätzlich werden stündliche Wettervorhersagen sowie die Luftqualität angezei
 
 1. Einen Stadtnamen eingeben.
 2. Auf „Suchen“ klicken oder Enter drücken.
-3. Die aktuellen Wetterdaten werden angezeigt.
-
-## Nächste Schritte
-
-- weitere Wetterbedingungen und Hintergründe hinzufügen
-- Design verbessern
+3. Die aktuellen Wetterdaten und Vorhersagen werden angezeigt.
