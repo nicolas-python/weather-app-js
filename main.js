@@ -314,6 +314,8 @@ function loadWeather(city)
             document.getElementById("weather_details").style.display = "block";
             document.getElementById("hourly_weather").style.display = "flex";
 
+            document.getElementById("welcome_features").style.display = "none";
+
             const temperature = data.main.temp - 273.15;                                                        /*-273.15 = unterschied zwischen Kelvin und Celsius */
             document.getElementById("temperature").textContent = `${temperature.toFixed(1)} °C`;    /* .toFixed(1) = eine Nachkommastelle */
 
